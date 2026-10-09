@@ -11,9 +11,10 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Petter Johan Crantz – Tech Lead og fullstack-utvikler">
 <meta property="og:description" content="Tech lead som tar produkter fra prototype til produksjon. .NET, React, Azure og AI-assistert utvikling.">
-<meta property="og:url" content="http://portfolio.crantz.dpdns.org">
+<meta property="og:url" content="https://portfolio.crantz.dpdns.org">
+<meta property="og:image" content="https://portfolio.crantz.dpdns.org/photo.jpg">
 <meta property="og:locale" content="nb_NO">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
 :root{--bg:#faf8f4;--surface:#ffffff;--border:#e3ddd2;--text:#1d232b;--muted:#556170;--accent:#0f766e;--accent-ink:#ffffff;--nav-bg:rgba(250,248,244,.92)}
@@ -46,6 +47,9 @@ h1{font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.1;margin:0 0 16px}
 h2{font-size:1.6rem;margin:0 0 28px}
 h2::before{content:"";display:inline-block;width:28px;height:3px;background:var(--accent);vertical-align:middle;margin-right:12px}
 .hero{padding:96px 0 72px}
+.hero-grid{display:grid;grid-template-columns:1fr 340px;gap:48px;align-items:center}
+.portrait{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;border-radius:16px;border:1px solid var(--border);display:block}
+@media (max-width:760px){.hero-grid{grid-template-columns:1fr;gap:28px}.portrait{order:-1;max-width:260px}}
 .eyebrow{color:var(--accent);font-weight:600;letter-spacing:.04em;margin:0 0 12px}
 .lead{color:var(--muted);font-size:1.15rem;max-width:640px;margin:0 0 28px}
 .btn{display:inline-block;padding:12px 22px;border-radius:8px;font-weight:600;text-decoration:none;border:1px solid var(--accent);margin:0 10px 10px 0}
@@ -92,11 +96,16 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font
 <main id="main">
 <section class="hero" id="top">
   <div class="wrap">
+    <div class="hero-grid">
+    <div>
     <p class="eyebrow">Hei, jeg er</p>
     <h1>Petter Johan Crantz</h1>
     <p class="lead">Jeg bygger programvare og leder utviklingsteam. Til daglig er jeg konsulent i Itera, og jeg bor i Fredrikstad.</p>
     <a class="btn primary" href="#projects">Se prosjekter</a>
     <a class="btn ghost" href="#contact">Ta kontakt</a>
+    </div>
+    <img class="portrait" src="photo.jpg" width="900" height="600" alt="Portrett av Petter Johan Crantz, smilende i grå genser">
+    </div>
     <div class="stats">
       <div class="stat"><strong>8 mnd</strong><span>fra tomt repo til produksjon, med meg som tech lead</span></div>
       <div class="stat"><strong>#1</strong><span>på Devin-bruk hos en stor nordisk bank</span></div>

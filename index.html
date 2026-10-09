@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Petter Johan Crantz – Tech Lead og fullstack-utvikler</title>
 <meta name="description" content="Petter Johan Crantz er senior konsulent og tech lead hos Itera. Fullstack, cloud native og AI-assistert utvikling – fra prototype til produksjon.">
-<meta name="theme-color" content="#0d1117">
+<meta name="theme-color" content="#faf8f4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="Petter Johan Crantz – Tech Lead og fullstack-utvikler">
 <meta property="og:description" content="Tech lead som tar produkter fra prototype til produksjon. .NET, React, Azure og AI-assistert utvikling.">
@@ -14,7 +16,12 @@
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
-:root{--bg:#0d1117;--surface:#161b22;--border:#262d38;--text:#e6edf3;--muted:#9aa7b4;--accent:#5eead4;--accent-ink:#04201c}
+:root{--bg:#faf8f4;--surface:#ffffff;--border:#e3ddd2;--text:#1d232b;--muted:#556170;--accent:#0f766e;--accent-ink:#ffffff;--nav-bg:rgba(250,248,244,.92)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1117;--surface:#161b22;--border:#262d38;--text:#e6edf3;--muted:#9aa7b4;--accent:#5eead4;--accent-ink:#04201c;--nav-bg:rgba(13,17,23,.92)}}
+:root[data-theme="dark"]{--bg:#0d1117;--surface:#161b22;--border:#262d38;--text:#e6edf3;--muted:#9aa7b4;--accent:#5eead4;--accent-ink:#04201c;--nav-bg:rgba(13,17,23,.92)}
+:root{color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark}}
+:root[data-theme="dark"]{color-scheme:dark}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -24,10 +31,13 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-off
 .skip{position:absolute;left:-999px;top:8px;background:var(--accent);color:var(--accent-ink);padding:8px 14px;border-radius:6px;z-index:20}
 .skip:focus{left:8px}
 .wrap{max-width:960px;margin:0 auto;padding:0 20px}
-header.nav{position:sticky;top:0;z-index:10;background:rgba(13,17,23,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+header.nav{position:sticky;top:0;z-index:10;background:var(--nav-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;min-height:58px;gap:12px;flex-wrap:wrap}
 .brand{font-weight:700;color:var(--text);text-decoration:none}
 .brand span{color:var(--accent)}
+.theme{background:none;border:1px solid var(--border);color:var(--text);border-radius:8px;padding:6px 12px;font:inherit;font-size:14px;cursor:pointer}
+.theme:hover{border-color:var(--accent)}
+.bar{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
 nav a{color:var(--muted);text-decoration:none;font-size:15px;padding:6px 0}
 nav a:hover{color:var(--text)}
@@ -45,7 +55,7 @@ h2::before{content:"";display:inline-block;width:28px;height:3px;background:var(
 .stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px}
 .stat strong{display:block;font-size:1.7rem;color:var(--accent)}
 .stat span{color:var(--muted);font-size:.95rem}
-.about p{max-width:720px;margin:0 0 16px}
+.about p,.outside p{max-width:720px;margin:0 0 16px}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;display:flex;flex-direction:column}
 .card h3{margin:0 0 8px;font-size:1.2rem}
@@ -56,6 +66,7 @@ h2::before{content:"";display:inline-block;width:28px;height:3px;background:var(
 .skills h3{font-size:1rem;color:var(--accent);margin:0 0 10px}
 .skills ul{margin:0;padding-left:18px;color:var(--muted)}
 .contact p{max-width:560px;color:var(--muted)}
+@media (max-width:640px){header.nav{position:static}section{padding:52px 0}.hero{padding:56px 0 48px}}
 footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:.9rem}
 </style>
 </head>
@@ -64,28 +75,32 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="#top">Petter<span>.</span>Crantz</a>
+    <div class="bar">
     <nav aria-label="Hovedmeny">
       <ul>
         <li><a href="#about">Om meg</a></li>
+        <li><a href="#outside">Utenfor jobb</a></li>
         <li><a href="#projects">Prosjekter</a></li>
         <li><a href="#skills">Kompetanse</a></li>
         <li><a href="#contact">Kontakt</a></li>
       </ul>
     </nav>
+    <button class="theme" id="theme" type="button" aria-label="Bytt mellom lyst og mørkt tema">Tema</button>
+    </div>
   </div>
 </header>
 <main id="main">
 <section class="hero" id="top">
   <div class="wrap">
-    <p class="eyebrow">Senior konsulent · Itera</p>
+    <p class="eyebrow">Hei, jeg er</p>
     <h1>Petter Johan Crantz</h1>
-    <p class="lead">Tech lead som tar produkter fra prototype til produksjon – og bruker AI-verktøy som en naturlig del av hverdagen.</p>
+    <p class="lead">Jeg bygger programvare og leder utviklingsteam. Til daglig er jeg konsulent i Itera, og jeg bor i Fredrikstad.</p>
     <a class="btn primary" href="#projects">Se prosjekter</a>
     <a class="btn ghost" href="#contact">Ta kontakt</a>
     <div class="stats">
-      <div class="stat"><strong>8 mnd</strong><span>fra null til produksjon som tech lead</span></div>
-      <div class="stat"><strong>#1</strong><span>Devin AI-bruker hos en stor nordisk bank</span></div>
-      <div class="stat"><strong>25</strong><span>anlegg i drift hos Enkeldrift</span></div>
+      <div class="stat"><strong>8 mnd</strong><span>fra tomt repo til produksjon, med meg som tech lead</span></div>
+      <div class="stat"><strong>#1</strong><span>på Devin-bruk hos en stor nordisk bank</span></div>
+      <div class="stat"><strong>25</strong><span>anlegg overvåkes av Enkeldrift, firmaet jeg er medeier i</span></div>
     </div>
   </div>
 </section>
@@ -93,9 +108,17 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font
 <section class="about" id="about">
   <div class="wrap">
     <h2>Om meg</h2>
-    <p>Jeg er tech lead og fullstack-utvikler med base i Fredrikstad. Jeg trives som bro mellom brukere, produktledelse og backend-team, og holder meg ikke unna koden.</p>
-    <p>Jeg har ledet team fra nullpunkt til produksjon, bygget IoT-baserte overvåkningsplattformer, kartbaserte feltapplikasjoner og mobilløsninger. Som medeier i Enkeldrift har jeg tatt fullt produktansvar fra idé til drift.</p>
-    <p>Bachelor i informatikk fra Universitetet i Oslo. Sertifisert i AZ-900 og ISTQB Foundation.</p>
+    <p>Jeg startet med informatikk i Oslo, men har lært mest av å sitte tett på folkene som faktisk skal bruke det jeg bygger. Jeg liker å forstå problemet først, og så finne den enkleste løsningen som holder.</p>
+    <p>De siste årene har jeg vært tech lead på prosjekter der vi startet med blankt ark. Jeg liker å eie arkitekturen, snakke med de som bestiller og gi utviklerne ro til å bygge. Jeg skriver fortsatt mye kode selv.</p>
+    <p>Ved siden av jobb er jeg medeier i Enkeldrift, der vi lager overvåkning av tekniske anlegg. Jeg har en bachelor fra Universitetet i Oslo, og AZ-900 og ISTQB på CV-en.</p>
+  </div>
+</section>
+
+<section class="outside" id="outside">
+  <div class="wrap">
+    <h2>Utenfor jobb</h2>
+    <p>Jeg bor i Fredrikstad sammen med hunden Bernt. Jeg trener CrossFit, går på ski og padler SUP når været tillater det, og prøver å få med meg noen DNT-turer hvert år.</p>
+    <p>Jeg er også frivillig matros på en redningsskøyte.</p>
   </div>
 </section>
 
@@ -105,22 +128,22 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font
     <div class="cards">
       <article class="card">
         <h3>Enkeldrift</h3>
-        <p>IoT-basert sanntidsovervåkning av tekniske anlegg med responsivt dashboard og varsling på e-post/SMS. 25 installasjoner i drift, blant annet i helsesektoren. Jeg er medeier og har produktansvaret.</p>
+        <p>Sensorer, et dashboard som fungerer godt på mobil, og varsler på e-post og SMS når noe avviker. 25 anlegg er i drift, blant annet i helsesektoren. Jeg er medeier og står for både arkitektur, kode og kundekontakt.</p>
         <ul class="tags" aria-label="Teknologi"><li>React</li><li>Express</li><li>Tailwind</li><li>Raspberry Pi</li><li>AWS</li></ul>
       </article>
       <article class="card">
         <h3>Drifty – drivbanesimulering</h3>
-        <p>Kartapplikasjon som visualiserer simulerte drivbaner for maritime redningsoppdrag. Tatt fra studentprosjekt til produksjonssystem i operativ drift.</p>
+        <p>Startet som et studentprosjekt på UiO og endte som et system i operativ drift. Et kart som viser hvor noe i sjøen kan drive, bygget på simuleringsdata.</p>
         <ul class="tags" aria-label="Teknologi"><li>.NET</li><li>React</li><li>Mapbox</li><li>NetCDF</li><li>MongoDB</li></ul>
       </article>
       <article class="card">
         <h3>Saksbehandling for reiseforsikring</h3>
-        <p>Ledet et team på tre fra null til produksjon på åtte måneder. Håndterer over 60 000 saker i året med sensitive helsedata, sanntidsoppdatering og integrasjon mot folkeregistre i fire land.</p>
+        <p>Jeg ledet tre utviklere fra start til produksjon på åtte måneder. Systemet tar i dag over 60 000 saker i året, med sensitive helsedata, live-oppdatering mellom faner og brukere, og oppslag mot folkeregistre i fire land.</p>
         <ul class="tags" aria-label="Teknologi"><li>.NET</li><li>React</li><li>React Native</li><li>SignalR</li><li>Azure</li></ul>
       </article>
       <article class="card">
         <h3>Leasingplattform for bank</h3>
-        <p>Tech lead for en skalerbar adminplattform for bilfinansiering på tvers av land. 4 apper for 4 land med 5 utviklere på under ett år, med team-wide AI-workflow.</p>
+        <p>Som tech lead la jeg arkitekturen som lar oss legge til nye moduler uten å gjøre alt om igjen. Fire apper for fire land, laget av fem utviklere på under ett år. Teamet bruker AI-verktøy som en vanlig del av jobben.</p>
         <ul class="tags" aria-label="Teknologi"><li>.NET</li><li>React</li><li>TypeScript</li><li>Micro frontends</li><li>Terraform</li></ul>
       </article>
     </div>
@@ -142,7 +165,7 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font
 <section class="contact" id="contact">
   <div class="wrap">
     <h2>Kontakt</h2>
-    <p>Har du et prosjekt, en idé eller bare lyst til å ta en prat om teknologi? Ta kontakt.</p>
+    <p>Har du en idé, et prosjekt eller bare lyst til å prate teknologi? Send meg gjerne en melding på LinkedIn.</p>
     <a class="btn primary" href="https://www.linkedin.com/in/pettercrantz/" rel="noopener">LinkedIn</a>
     <a class="btn ghost" href="https://github.com/pettersandvand" rel="noopener">GitHub</a>
   </div>
@@ -151,5 +174,6 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font
 <footer>
   <div class="wrap">© 2026 Petter Johan Crantz</div>
 </footer>
+<script>(function(){var r=document.documentElement,b=document.getElementById("theme");function cur(){var t=r.getAttribute("data-theme");return t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}function label(){b.textContent=cur()==="dark"?"Lyst tema":"Mørkt tema"}b.addEventListener("click",function(){var n=cur()==="dark"?"light":"dark";r.setAttribute("data-theme",n);try{localStorage.setItem("theme",n)}catch(e){}label()});label()})();</script>
 </body>
 </html>
